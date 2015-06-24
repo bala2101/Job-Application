@@ -1,10 +1,8 @@
 <?php
 	session_start();
 		include("connection.php");
-		$database = "test1";
-			mysqli_select_db($conn, $database) or die( "Unable to select database");
 	
-	$query="SELECT * FROM `users`";
+	$query="SELECT * FROM `profiles`";
 	
 	$result = mysqli_query($conn,$query);
 	
@@ -62,7 +60,7 @@
 					 "<td>".$row['firstName']." ".$row['lastName']."</td>".
 					 "<td>".$row['email']."</td>".
 					 "<td>".$row['phone']."</td>".
-					 "<td><a href = 'viewcv.php?firstName=".$row['firstName']."&id=".$row['id']."'>view</td>".
+					 "<td><a href = 'viewcv.php?firstName=".$row['firstName']."&id=".$row['id']."' target = '_blank'>view</td>".
 					 "</tr>";
 			}
 		}

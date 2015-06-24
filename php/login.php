@@ -8,11 +8,10 @@
 		}
 
 		include("connection.php");
-		$database = "test1";
-			mysqli_select_db($conn, $database) or die( "Unable to select database");
+		
 		if (isset($_POST["submit"]) AND $_POST['submit'] == "Log In") {	
 	
-		$query = "SELECT * FROM `admin` WHERE name='".mysqli_real_escape_string($conn, $_POST['username'])."'AND 
+		$query = "SELECT * FROM `admin` WHERE admin='".mysqli_real_escape_string($conn, $_POST['username'])."'AND 
 		password='".$_POST['password']."' LIMIT 1";
 
 		$result = mysqli_query($conn, $query);

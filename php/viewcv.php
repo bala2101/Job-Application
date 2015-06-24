@@ -5,10 +5,8 @@
 	$idval = $_GET['id'];
 
 		include("connection.php");
-		$database = "test1";
-			mysqli_select_db($conn, $database) or die( "Unable to select database");
-	
-	$query="SELECT cv FROM `users` WHERE id='".$idval."' AND firstName='".$fname."'";
+		
+	$query="SELECT cv FROM `profiles` WHERE id='".$idval."' AND firstName='".$fname."'";
 	
 	$result = mysqli_query($conn,$query);
 

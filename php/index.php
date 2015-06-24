@@ -28,16 +28,14 @@ if(isset($_POST["submit"])){
 			
 			$errmsg = "";
 			include("connection.php");
-			$database = "test1";
-			mysqli_select_db($conn, $database) or die( "Unable to select database");
-			echo "database";
+		
 			if($errmsg == ""){
 				if($_POST['completed'] == 1){
 					$uploadfile = basename($_FILES['myfile']['name']);
 					move_uploaded_file($_FILES['myfile']['tmp_name'], $uploadfile);
 					$fileAsString = base64_encode(file_get_contents($uploadfile));
 					if(strlen($fileAsString) < 1000000){
-						$query = "INSERT INTO `users` VALUES ('','".mysqli_real_escape_string($conn, $_POST['firstName'])."','".mysqli_real_escape_string($conn, $_POST['lastName'])."','".mysqli_real_escape_string($conn, $_POST['address'])."','".mysqli_real_escape_string($conn, $_POST['city'])."','".mysqli_real_escape_string($conn, $_POST['pcode'])."','".mysqli_real_escape_string($conn, $_POST['phone'])."','".mysqli_real_escape_string($conn, $_POST['email'])."', '".$fileAsString."')";
+						$query = "INSERT INTO `profiles` VALUES ('','".mysqli_real_escape_string($conn, $_POST['firstName'])."','".mysqli_real_escape_string($conn, $_POST['lastName'])."','".mysqli_real_escape_string($conn, $_POST['address'])."','".mysqli_real_escape_string($conn, $_POST['city'])."','".mysqli_real_escape_string($conn, $_POST['pcode'])."','".mysqli_real_escape_string($conn, $_POST['phone'])."','".mysqli_real_escape_string($conn, $_POST['email'])."', '".$fileAsString."')";
 
 						mysqli_query($conn, $query);
 
@@ -96,7 +94,7 @@ if(isset($_POST["submit"])){
 				<tr><td><label for = "pcode">Postal Code</label></br></br></td><td><input type="text" name="pcode" class = "form-group" value = "<?php if(isset($_POST['pcode'])){echo $_POST['pcode']; } ?>" placeholder = "Postal code" required></td></tr>
 				<tr><td><label for = "phone">Phone</label></br></br></td><td><input type="text" name="phone" class = "form-group" value = "<?php if(isset($_POST['phone'])){echo $_POST['phone']; } ?>" placeholder = "Phone" required></td></tr>
 				<tr><td><label for = "email">Email</label></br></br></td><td><input type="email" name="email" class = "form-group" value = "<?php if(isset($_POST['email'])){echo $_POST['email']; } ?>" placeholder = "Email" required></td></tr>
-				<tr><td><label for = "cv">CV</label></br></td><td><input type = "hidden" name = "MAX_FILE_SIZE" value = "1000000"><input type = "hidden" name = "completed" value = "1"><input type="file" name="myfile" value = "<?php if(isset($_POST['myfile'])){echo $_POST['myfile']; } ?>" required></td></tr>
+				<tr><td><label for = "cv">CV</label></td><td></br><input type = "hidden" name = "MAX_FILE_SIZE" value = "1000000"><input type = "hidden" name = "completed" value = "1"><input type="file" name="myfile" value = "<?php if(isset($_POST['myfile'])){echo $_POST['myfile']; } ?>" required><h6>only pdf file...</h6></td></tr>
 				<tr><td></br></br><input type="submit" value ="Apply Job" name="submit" class="btn btn-success btn-lg"></td></tr>
 			</table>
 		</form>
