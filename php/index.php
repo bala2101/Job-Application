@@ -91,7 +91,7 @@ if(isset($_POST["submit"])){  // PHP form validation || Back end validation
 	</div>
 	<div id = "main" class = "jobform">
 		<h2>Application for System Administrator position</h2></br></br></br> 
-		<?php 
+		<?php  // displaying the error messages.
 			if(isset($result)){
 				echo $result;
 			}

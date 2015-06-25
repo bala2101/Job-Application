@@ -27,14 +27,14 @@
 		if (isset($_POST["submit"]) AND $_POST['submit'] == "Log In") {	
 	
 		$query = "SELECT * FROM `admin` WHERE admin='".mysqli_real_escape_string($conn, $_POST['username'])."'AND 
-		password='".$_POST['password']."' LIMIT 1"; // query to check whether the given credentials are true or not.
+		password='".md5(md5($_POST['username']) .$_POST['password'])."' LIMIT 1"; // query to check whether the given credentials are true or not.
 
 		$result = mysqli_query($conn, $query);
 		if (!$result) {
 		printf("Error: %s\n", mysqli_error($conn));
 		//exit();
 		}
-		
+		mysqli_error($conn);
 		$row = mysqli_fetch_array($result);
 		
 		if($row){
@@ -45,7 +45,8 @@
     
 		} else {
 		
-			$error = "We could not find a user with that email and password. Please try again.";
+			$error = " Please check the username and password";
+			$result = '<div class = "alert alert-danger"><strong>Invalid Login:</strong>'.$error.'</div>';
 		}
 	}
 ?>
@@ -79,7 +80,11 @@
 	</div>
 	<div id = "main" class = "jobform">
 		<h2>Admin Login</h2></br></br></br> 
-
+		<?php  //displaying the error messages.
+			if(isset($result)){
+				echo $result;
+			}
+		?>
 		<form method = "POST">
 			<div class="form-group">
 				<label for = "uname"><h4><strong>Username</strong></h4></label></br>
