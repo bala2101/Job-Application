@@ -6,7 +6,7 @@
 
 		include("connection.php");
 		
-	$query="SELECT cv FROM `profiles` WHERE id='".$idval."' AND firstName='".$fname."'";
+	$query="SELECT cv FROM `profiles` WHERE id='".$idval."' AND firstName='".$fname."'"; 
 	
 	$result = mysqli_query($conn,$query);
 
@@ -42,6 +42,7 @@
 	<div id = "main" class = "jobform">
 		<h2><?php echo $fname?>'s CV.</h2></br></br></br> 
 <?php
+	// viewing the pdf file in the database.
 	$row = mysqli_fetch_array($result);
 	$fileAsString = base64_decode($row['cv']);
 	header("Content-type: application/pdf");

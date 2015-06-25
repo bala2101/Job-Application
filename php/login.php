@@ -1,7 +1,8 @@
 <?php
 	session_start();
-	if (isset($_GET["Logout"]) AND $_GET["Logout"]==1 AND isset($_SESSION["id"])) { session_destroy();
+	if (isset($_GET["Logout"]) AND $_GET["Logout"]==1 AND isset($_SESSION["id"])) {  // checking whether the admin logged in or not
 		
+			session_destroy();
 			$message="You have been logged out. Have a nice day!";
 			$urll = "login.php";
 			$urll .= "?Logout=" .$_GET["Logout"];
@@ -9,7 +10,7 @@
 			exit();
 		
 		}
-	if(isset($_GET["SessionExpired"]) AND $_GET["SessionExpired"] == 1){ session_destroy();
+	if(isset($_GET["SessionExpired"]) AND $_GET["SessionExpired"] == 1){ session_destroy(); // checking whether the session expired or not
 		$message="Session expired. Please login again!";
 		$url = "login.php";
 		$url .= "?Session_Expired=" .$_GET["SessionExpired"];
@@ -26,7 +27,7 @@
 		if (isset($_POST["submit"]) AND $_POST['submit'] == "Log In") {	
 	
 		$query = "SELECT * FROM `admin` WHERE admin='".mysqli_real_escape_string($conn, $_POST['username'])."'AND 
-		password='".$_POST['password']."' LIMIT 1";
+		password='".$_POST['password']."' LIMIT 1"; // query to check whether the given credentials are true or not.
 
 		$result = mysqli_query($conn, $query);
 		if (!$result) {
@@ -98,9 +99,7 @@
 	</div>
 	</div>
   </div>
-  <!--<script src="../javascript/script.js"></script>
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
  </body>
 </html>

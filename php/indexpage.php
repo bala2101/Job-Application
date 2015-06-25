@@ -18,7 +18,7 @@
 	$_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 		include("connection.php");
 	
-	$query="SELECT * FROM `profiles`";
+	$query="SELECT * FROM `profiles`"; // query to get all the records from the database
 	
 	$result = mysqli_query($conn,$query);
 	
@@ -70,7 +70,7 @@
 		if(!$result){
 			echo "<p>No candidate registered yet.</p>";
 		} else {
-			while($row = mysqli_fetch_array($result)){
+			while($row = mysqli_fetch_array($result)){ // displaying the applicant's profiles in a tabular format
 				echo "<tr>".
 					 "<td>".$row['id']."</td>".
 					 "<td>".$row['firstName']." ".$row['lastName']."</td>".
