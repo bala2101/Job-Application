@@ -1,4 +1,9 @@
 <?php
+session_start();
+	if(isset($_SESSION['id'])){echo "inside";
+		header("Location:indexpage.php");
+		exit();
+	}
 if(isset($_POST["submit"])){
 		if(!$_POST['firstName']){
 			$error = "</br>Please enter your First Name.";

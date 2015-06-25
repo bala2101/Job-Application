@@ -1,12 +1,17 @@
 <?php
 	session_start();
-		
-		if (isset($_GET["Logout"]) AND $_GET["Logout"]==1 AND $_SESSION['id']) { session_destroy();
+	if (isset($_GET["Logout"]) AND $_GET["Logout"]==1 AND isset($_SESSION["id"])) { session_destroy();
 		
 			$message="You have been logged out. Have a nice day!";
+			header("Location:login.php");
+			exit();
 		
 		}
-
+	if(isset($_SESSION['id'])){echo "inside";
+		header("Location:indexpage.php");
+		exit();
+	}
+		
 		include("connection.php");
 		
 		if (isset($_POST["submit"]) AND $_POST['submit'] == "Log In") {	
@@ -24,7 +29,7 @@
 		
 		if($row){
 		
-			$_SESSION['id']=$row['id'];
+			$_SESSION['id']=$row['admin'];
 			
 			header("Location:indexpage.php");
     
