@@ -17,11 +17,13 @@ if(mysqli_query($conn, $queryCreateProfilesTable)){}else{echo "Error creating pr
 
 $queryCreateAdminTable = "CREATE TABLE IF NOT EXISTS `admin` (`admin` text, `password` varchar(20))";
 
-if(mysqli_query($conn, $queryCreateAdminTable)){
-	$queryCred = "INSERT INTO `admin` VALUES('admin','admin')";
-	if(mysqli_query($conn, $queryCred)){}else{echo "Error entering values:".myqli_error($conn);}
-} else {
-	echo "Error creating admin table:".mysqli_error($conn);
-}
+if(mysqli_query($conn, $queryCreateAdminTable)){} else {echo "Error creating admin table:".mysqli_error($conn);}
 
+$check = "SELECT * FROM `admin`";
+$check1 = mysqli_query($conn, $check);
+$rows = mysqli_num_rows($check1);
+if(!$rows){
+$queryCred = "INSERT INTO `admin` VALUES('admin','admin')";
+	if(mysqli_query($conn, $queryCred)){}else{echo "Error entering values:".myqli_error($conn);}
+}
 ?>
