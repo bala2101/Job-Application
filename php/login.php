@@ -7,6 +7,13 @@
 			exit();
 		
 		}
+	if(isset($_GET["SessionExpired"]) AND $_GET["SessionExpired"] == 1){ session_destroy();
+		$message="Session expired. Please login again!";
+		$url = "login.php";
+		$url .= "?Session_Expired=" .$_GET["SessionExpired"];
+		header("Location:$url");
+		exit();
+	}
 	if(isset($_SESSION['id'])){echo "inside";
 		header("Location:indexpage.php");
 		exit();

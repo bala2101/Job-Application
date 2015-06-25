@@ -4,7 +4,18 @@
 			header("Location:login.php");
 			exit();
 		
-		}
+	}
+
+	if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 30)) {
+		// last request was more than 30 minutes ago
+		session_unset();     // unset $_SESSION variable for the run-time 
+		session_destroy();   // destroy session data in storage
+		$url = "login.php";
+		$url .= "?Session_Expired=1";
+		header("Location:$url");
+		exit();
+	}
+	$_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 		include("connection.php");
 	
 	$query="SELECT * FROM `profiles`";
