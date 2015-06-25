@@ -26,6 +26,12 @@ if(isset($_POST["submit"])){
 		if(!$_POST['email']){
 			$error .= "</br>Please enter your email";
 		}
+		if(strlen($_POST['phone']) <8 OR strlen($_POST['phone'])>11){
+			$error = "</br>Please enter a valid Phone number.";
+		}
+		if(strlen($_POST['pcode']) <5 OR strlen($_POST['phone'])>8){
+			$error = "</br>Please enter a valid Postal code.";
+		}
 		if(isset($error)){
 			$result = '<div class = "alert alert-danger"><strong>There were error(s) in your form:</strong>'.$error.'</div>';
 		} else {
@@ -90,7 +96,7 @@ if(isset($_POST["submit"])){
 				echo $result;
 			}
 		?>
-		<form method = "POST" enctype = "multipart/form-data">
+		<form method = "POST" name ="jobform" enctype = "multipart/form-data" onSubmit = "return validate()">
 			<table>
 				<tr><td><label for = "fname">First Name</label></br></br></td><td><input type="text" name="firstName" class = "form-group" value = "<?php if(isset($_POST['firstName'])){echo $_POST['firstName']; } ?>" placeholder = "First Name" required></td></tr>
 				<tr><td><label for = "lname">Last Name</label></br></br></td><td><input type="text" name="lastName" class = "form-group" value = "<?php if(isset($_POST['lastName'])){echo $_POST['lastName']; } ?>" placeholder = "Last Name" required></td></tr>
@@ -110,7 +116,22 @@ if(isset($_POST["submit"])){
 	</div>
 	</div>
   </div>
-  <!--<script src="../javascript/script.js"></script>
+  <!--<script>
+	function validate(){
+		var plen = document.jobform.phone.value;
+		var clen = document.jobform.pcode.value;
+		if(isNaN(document.jobform.phone.value) || plen.length<8){
+			document.jobform.phone.focus();
+			return false;
+		}
+		if(isNaN(document.jobform.pcode.value) || clen.length<5){
+			document.jobform.pcode.focus();
+			return false;
+		}
+
+		return true;
+	}
+  </script>
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>

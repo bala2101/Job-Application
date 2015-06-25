@@ -3,7 +3,9 @@
 	if (isset($_GET["Logout"]) AND $_GET["Logout"]==1 AND isset($_SESSION["id"])) { session_destroy();
 		
 			$message="You have been logged out. Have a nice day!";
-			header("Location:login.php");
+			$urll = "login.php";
+			$urll .= "?Logout=" .$_GET["Logout"];
+			header("Location:$urll");
 			exit();
 		
 		}
@@ -14,7 +16,7 @@
 		header("Location:$url");
 		exit();
 	}
-	if(isset($_SESSION['id'])){echo "inside";
+	if(isset($_SESSION['id'])){
 		header("Location:indexpage.php");
 		exit();
 	}
