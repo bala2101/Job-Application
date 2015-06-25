@@ -1,7 +1,7 @@
 <?php
 $sqluser = "root";
 $sqlpassword = "root";
-$database = "test5";
+$database = "systemadmin";
 
 $conn= mysqli_connect("localhost", $sqluser, $sqlpassword); // establishing connection to the database
 

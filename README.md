@@ -6,7 +6,8 @@ Fill the Apply job form at least once beform logging into View data.
 
 Change the database connection credentials in connection.php file.
 
-###Login credentials.
+###View data Login credentials.
 username: admin
 password: admin
 
+Little Bootstrap is used for styling.

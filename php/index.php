@@ -42,12 +42,12 @@ if(isset($_POST["submit"])){  // PHP form validation || Back end validation
 		
 			if($errmsg == ""){
 				if($_POST['completed'] == 1){ // uploading the pdf file 
-					$uploadfile = basename($_FILES['myfile']['name']);
-					move_uploaded_file($_FILES['myfile']['tmp_name'], $uploadfile);
+					$uploadfile = basename($_FILES['myfile']['name']);					// When we upload a file it saves in a temporary location
+					move_uploaded_file($_FILES['myfile']['tmp_name'], $uploadfile);		// Moving file from temp location to permanent location.
 					$fileAsString = base64_encode(file_get_contents($uploadfile));
 					if(strlen($fileAsString) < 1000000){
 						$query = "INSERT INTO `profiles` VALUES ('','".mysqli_real_escape_string($conn, $_POST['firstName'])."','".mysqli_real_escape_string($conn, $_POST['lastName'])."','".mysqli_real_escape_string($conn, $_POST['address'])."','".mysqli_real_escape_string($conn, $_POST['city'])."','".mysqli_real_escape_string($conn, $_POST['pcode'])."','".mysqli_real_escape_string($conn, $_POST['phone'])."','".mysqli_real_escape_string($conn, $_POST['email'])."', '".$fileAsString."')";
-
+			
 						mysqli_query($conn, $query);
 
 						$errmsg = "Record inserted";
